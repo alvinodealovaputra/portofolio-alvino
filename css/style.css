@@ -492,7 +492,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* KONDISI NORMAL (SEBELUM DISENTUH KURSOR) - Bersih Tanpa Duplikasi */
+/* KONDISI NORMAL (SEBELUM DISENTUH KURSOR) */
 .contact-email {
     font-size: 2rem;
     color: #f3f4f6; 
@@ -505,15 +505,11 @@ body {
 
 /* KONDISI HOVER (SAAT KURSOR DIATAS EMAIL) */
 .contact-email:hover {
-    /* Gradasi warna diselaraskan dengan warna siber barumu */
     background: linear-gradient(45deg, var(--accent-color), #4e58b7);
-    
     background-clip: text;
     -webkit-background-clip: text;
-    
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
-    
     transform: translateY(-3px); 
 }
 
@@ -600,21 +596,43 @@ body {
         padding-top: 140px;
         height: auto;
     }
+    
+    /* FIX OVERFLOW: Mengunci grid agar presisi 100% mengikuti layar HP */
     .hero-container {
-        grid-template-columns: 1fr; /* Menumpuk satu kolom ke bawah di HP */
+        grid-template-columns: 1fr; 
         text-align: center;
         gap: 40px;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
     }
-    .hero-content h1 { font-size: 2.6rem; }
-    .hero-content h2 { font-size: 1.5rem; }
+    
+    /* FIX OVERFLOW: Menyesuaikan font judul utama dan memaksa patah kata ke bawah */
+    .hero-content h1 { 
+        font-size: 2.3rem; 
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 100%;
+    }
+    
+    .hero-content h2 { 
+        font-size: 1.5rem; 
+    }
     
     .id-card {
         margin: 0 auto; /* Menengahkan ID Card di mobile */
+        max-width: 100%; /* Menyesuaikan dengan lebar HP kecil */
     }
+    
     .id-barcode {
         justify-content: center;
     }
 
-    .about-grid, .projects-grid { grid-template-columns: 1fr; }
-    .contact-email { font-size: 1.3rem; }
+    .about-grid, .projects-grid { 
+        grid-template-columns: 1fr; 
+    }
+    
+    .contact-email { 
+        font-size: 1.3rem; 
+    }
 }

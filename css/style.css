@@ -49,18 +49,11 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 2px;
-    
-    /* Pengaturan Background Gradasi disesuaikan tema baru */
     background: linear-gradient(45deg, #4e58b7, #00bdce);
-    
-    /* Efek Potong Background Mengikuti Teks */
     background-clip: text;
     -webkit-background-clip: text;
-    
-    /* Membuat Teks Asli Transparan Agar Gradasinya Kelihatan */
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
-    
     display: inline-block;
 }
 
@@ -86,7 +79,7 @@ body {
 
 /* --- HAMBURGER MENU ELEMENT --- */
 .hamburger {
-    display: none; /* Sembunyikan default di desktop */
+    display: none;
     flex-direction: column;
     cursor: pointer;
     gap: 6px;
@@ -121,7 +114,6 @@ body {
     z-index: 10;
 }
 
-/* Animasi Background Blobs */
 .hero-bg-shapes .shape {
     position: absolute;
     filter: blur(80px);
@@ -202,7 +194,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Animasi masuk: meluncur ke atas dan memudar masuk */
     animation: cardEntrance 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
@@ -218,11 +209,9 @@ body {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
     position: relative;
-    /* Animasi mengambang statis */
     animation: cardFloat 6s ease-in-out infinite alternate;
 }
 
-/* Ornamen garis neon atas */
 .id-card::before {
     content: '';
     position: absolute;
@@ -333,16 +322,9 @@ body {
     color: var(--accent-color);
 }
 
-/* --- KEYFRAMES HERO ANIMATION --- */
 @keyframes cardEntrance {
-    0% {
-        opacity: 0;
-        transform: translateY(60px) rotateX(12deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) rotateX(0deg);
-    }
+    0% { opacity: 0; transform: translateY(60px) rotateX(12deg); }
+    100% { opacity: 1; transform: translateY(0) rotateX(0deg); }
 }
 
 @keyframes cardFloat {
@@ -492,7 +474,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* KONDISI NORMAL (SEBELUM DISENTUH KURSOR) */
 .contact-email {
     font-size: 2rem;
     color: #f3f4f6; 
@@ -503,7 +484,6 @@ body {
     transition: all 0.3s ease; 
 }
 
-/* KONDISI HOVER (SAAT KURSOR DIATAS EMAIL) */
 .contact-email:hover {
     background: linear-gradient(45deg, var(--accent-color), #4e58b7);
     background-clip: text;
@@ -526,17 +506,23 @@ body {
     transform: translateY(-3px);
 }
 
-/* --- RESPONSIVE & MOBILE HAMBURGER (MUNCUL DI SEBELAH KIRI HP) --- */
+/* --- RESPONSIVE & MOBILE HAMBURGER (PERBAIKAN TOTAL LAYOUT HP) --- */
 @media (max-width: 768px) {
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden; /* Pengunci utama agar tidak bisa digeser ke kanan */
+    }
+
     .navbar {
         padding: 20px 5%;
         flex-direction: row;
         justify-content: space-between;
     }
 
-    /* Memaksa Logo Berada di Kanan, dan Hamburger Berada di Kiri */
     .navbar .logo {
         order: 2; 
+        font-size: 1.2rem; /* Perkecil sedikit di HP agar hemat ruang */
     }
 
     .hamburger {
@@ -544,12 +530,11 @@ body {
         order: 1; 
     }
 
-    /* Menu Navigasi Bergeser dari Sisi Kiri HP */
     .nav-links {
         display: flex;
         flex-direction: column;
         position: fixed;
-        left: -100%; /* Sembunyi di luar kiri layar */
+        left: -100%; 
         top: 0;
         width: 280px; 
         height: 100vh;
@@ -571,12 +556,10 @@ body {
         font-weight: 600;
     }
 
-    /* Ketika Ditambahkan Class Aktif via JS */
     .nav-links.active {
         left: 0; 
     }
 
-    /* Transisi Hamburger Menjadi Simbol Silang 'X' */
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
         background-color: var(--accent-color);
@@ -591,37 +574,78 @@ body {
         background-color: var(--accent-color);
     }
 
-    /* Pengaturan Konten Lain Saat Layar Kecil (Tablet/HP) */
+    /* Pengaturan Konten Saat Layar Kecil (Tablet/HP) */
     .hero {
-        padding-top: 140px;
+        padding-top: 130px;
+        padding-left: 5%;
+        padding-right: 5%;
         height: auto;
+        min-height: auto;
     }
     
-    /* FIX OVERFLOW: Mengunci grid agar presisi 100% mengikuti layar HP */
     .hero-container {
         grid-template-columns: 1fr; 
         text-align: center;
-        gap: 40px;
+        gap: 30px;
         width: 100%;
         max-width: 100%;
         overflow: hidden;
     }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+    }
     
-    /* FIX OVERFLOW: Menyesuaikan font judul utama dan memaksa patah kata ke bawah */
     .hero-content h1 { 
-        font-size: 2.3rem; 
+        font-size: 2rem; /* Ukuran pas untuk HP agar tidak meluber */
+        line-height: 1.2;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        white-space: normal; /* Memaksa nama panjang patah kata otomatis ke bawah */
         width: 100%;
     }
     
     .hero-content h2 { 
-        font-size: 1.5rem; 
+        font-size: 1.3rem; 
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    /* Penataan Tombol di HP: Menjadi bertumpuk vertikal dengan rapi */
+    .hero-content .btn {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 12px;
+        text-align: center;
     }
     
+    /* Penataan Ulang Struktur ID Card di HP */
     .id-card {
-        margin: 0 auto; /* Menengahkan ID Card di mobile */
-        max-width: 100%; /* Menyesuaikan dengan lebar HP kecil */
+        margin: 0 auto; 
+        width: 100%;
+        max-width: 100%; 
+        padding: 20px;
+    }
+
+    .id-card-body {
+        flex-direction: column; /* Mengubah posisi foto & teks dari samping jadi atas-bawah */
+        gap: 15px;
+        text-align: center;
+    }
+
+    .id-photo-frame {
+        width: 110px;
+        height: 140px;
+        margin: 0 auto; /* Menengahkan posisi foto bingkai */
+    }
+
+    .id-info h3 {
+        font-size: 1.4rem;
     }
     
     .id-barcode {
@@ -630,9 +654,11 @@ body {
 
     .about-grid, .projects-grid { 
         grid-template-columns: 1fr; 
+        gap: 30px;
     }
     
     .contact-email { 
-        font-size: 1.3rem; 
+        font-size: 1.2rem; 
+        word-wrap: break-word;
     }
 }
